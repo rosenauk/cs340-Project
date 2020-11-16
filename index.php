@@ -13,7 +13,7 @@
 <body>
 
 	<h1>
-		PlatToVids
+		Video Game Organizer
 	</h1>
 	
 	<p>
@@ -33,19 +33,7 @@
 	<br>
 	
 	<p>
-		View, add to, and delete from the table here.
-	</p>
-	
-	<br>
-	
-	<p>
-		[Put stuff to add an entry here]
-	</p>
-	
-	<br>
-	
-	<p>
-		[Put stuff to delete an entry here]
+		View the table here.
 	</p>
 	
 	<br>
@@ -57,32 +45,9 @@
 	<br>
 	
 	<p>
-		[Put Table here] &nbsp (titleID, platformID) [Every platform doesn't need a video game title but normally will]
-		<table style=" border:1px solid black; border-collapse: collapse; text-align: left;background-color: #F5F5F5;">
-			<col width= "100px" />
-			<col width= "100px" />
-		  <tr>
-			<th>titleID</th>
-			<th>platformID</th>
-		  </tr>
-		  <tr>
-			<td>1</td>
-			<td>1</td>
-		  </tr>
-		  <tr>
-			<td>1</td>
-			<td>2</td>
-		  </tr>
-		  <tr>
-			<td>2</td>
-			<td>1</td>
-		  </tr>
-		  <tr>
-			<td>2</td>
-			<td>2</td>
-		  </tr>
-		</table>
+		[Put Table here] &nbsp (all together)
 	</p>
+
 
 
 </body>

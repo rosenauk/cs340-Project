@@ -5,15 +5,13 @@
   <meta charset="utf-8">
 
   <title>Database Project</title>
-  
-  <link rel="shortcut icon" href="icon.png" />
 
 </head>
 
 <body>
 
 	<h1>
-		PlatToVids
+		Genres
 	</h1>
 	
 	<p>
@@ -25,9 +23,9 @@
 		&nbsp
 		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/platforms.html">Platforms</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.html">Ratings</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/genres.html">Genres</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/PlatToVids.html">PlatToVids</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.html">Ratings</a>
 	</p>
 	
 	<br>
@@ -57,32 +55,9 @@
 	<br>
 	
 	<p>
-		[Put Table here] &nbsp (titleID, platformID) [Every platform doesn't need a video game title but normally will]
-		<table style=" border:1px solid black; border-collapse: collapse; text-align: left;background-color: #F5F5F5;">
-			<col width= "100px" />
-			<col width= "100px" />
-		  <tr>
-			<th>titleID</th>
-			<th>platformID</th>
-		  </tr>
-		  <tr>
-			<td>1</td>
-			<td>1</td>
-		  </tr>
-		  <tr>
-			<td>1</td>
-			<td>2</td>
-		  </tr>
-		  <tr>
-			<td>2</td>
-			<td>1</td>
-		  </tr>
-		  <tr>
-			<td>2</td>
-			<td>2</td>
-		  </tr>
-		</table>
+		[Put Table here] &nbsp (genreID, genre)
 	</p>
+
 
 
 </body>
