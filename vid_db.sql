@@ -78,8 +78,8 @@ CREATE TABLE `PlatToVids` (
   `platformID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`titleID`,`platformID`),
   KEY `platformID` (`platformID`),
-  CONSTRAINT `PlatToVids_ibfk_1` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`),
-  CONSTRAINT `PlatToVids_ibfk_2` FOREIGN KEY (`platformID`) REFERENCES `Platforms` (`platformID`)
+  CONSTRAINT `PlatToVids_ibfk_1` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `PlatToVids_ibfk_2` FOREIGN KEY (`platformID`) REFERENCES `Platforms` (`platformID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -89,6 +89,7 @@ CREATE TABLE `PlatToVids` (
 
 LOCK TABLES `PlatToVids` WRITE;
 /*!40000 ALTER TABLE `PlatToVids` DISABLE KEYS */;
+INSERT INTO `PlatToVids` VALUES (1,1),(1,2),(1,3),(1,4),(2,1),(2,2),(2,4),(3,3),(3,4);
 /*!40000 ALTER TABLE `PlatToVids` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,13 +113,13 @@ CREATE TABLE `Publishers` (
   CONSTRAINT `unique_pName` UNIQUE (`pName`),
   PRIMARY KEY (`publisherID`),
   Key `titleID` (`titleID`),
-  CONSTRAINT `publishers_titleID_fk` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`)
+  CONSTRAINT `publishers_titleID_fk` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
 LOCK TABLES `Publishers` WRITE;
 INSERT INTO `Publishers` 
-VALUES (1, 3, 'Ubisoft'),(2, 2, 'Microsoft'),(3, 1, 'FROM SOFTWARE');
+VALUES (1, 1, 'Mojang Studios'),(2, 2, 'Rockstar Games'),(3, 3, 'Nintendo');
 UNLOCK TABLES;
 
 
@@ -130,13 +131,13 @@ CREATE TABLE `Ratings` (
   `rating` varchar(100) NOT NULL,
   PRIMARY KEY (`ratingID`),
   Key `titleID` (`titleID`),
-  CONSTRAINT `ratings_titleID_fk` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`)
+  CONSTRAINT `ratings_titleID_fk` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
 LOCK TABLES `Ratings` WRITE;
 INSERT INTO `Ratings` 
-VALUES (1, 2, 'great game'), (2,1, 'kinda sucked'), (3, 3, 'amazin');
+VALUES (1, 1, 'E10+'), (2,2, 'M'), (3, 3, 'E');
 UNLOCK TABLES;
 
 
