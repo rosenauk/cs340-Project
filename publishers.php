@@ -146,7 +146,7 @@
 				
 				<form>
 				  <label>titleID </label>
-				  <input type="text" name="S_titleID"><br />
+				  <input type="number" name="S_titleID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
 				</form>
@@ -164,16 +164,34 @@
 			Search by publisherID:
 			<?php
 				echo $_GET["S_publisherID"];
+				
+				if($_GET["S_publisherID"])
+				{
+					$result = mysql_query("SELECT * FROM Publishers WHERE publisherID LIKE {$_GET["S_publisherID"]}");
+				};
+				
+				
 			?>
 			<br>
 			Search by titleID:
 			<?php
 				echo $_GET["S_titleID"];
+				
+				if($_GET["S_titleID"])
+				{
+					$result = mysql_query("SELECT * FROM Publishers WHERE titleID LIKE {$_GET["S_titleID"]}");
+				};
 			?>
 			<br>
 			Search by pName:
 			<?php
 				echo $_GET["S_pName"];
+				
+				//does not work !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				if($_GET["S_pName"])
+				{
+					$result = mysql_query("SELECT * FROM Publishers WHERE pName LIKE {$_GET["S_pName"]}");
+				};
 			?>
 			<br>
 		</p>

@@ -158,16 +158,31 @@
 			Search by ratingID:
 			<?php
 				echo $_GET["S_ratingID"];
+				
+				if($_GET["S_ratingID"])
+				{
+					$result = mysql_query("SELECT * FROM Ratings WHERE ratingID LIKE {$_GET["S_ratingID"]}");
+				};
 			?>
 			<br>
 			Search by titleID:
 			<?php
 				echo $_GET["S_titleID"];
+				
+				if($_GET["S_titleID"])
+				{
+					$result = mysql_query("SELECT * FROM Ratings WHERE titleID LIKE {$_GET["S_titleID"]}");
+				};
 			?>
 			<br>
 			Search by rating:
 			<?php
 				echo $_GET["S_rating"];
+				
+				if($_GET["S_rating"])
+				{
+					$result = mysql_query("SELECT * FROM Ratings WHERE rating LIKE {$_GET["S_rating"]}");
+				};
 			?>
 			<br>
 		</p>

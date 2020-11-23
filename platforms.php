@@ -157,11 +157,21 @@
 			Search by platformID:
 			<?php
 				echo $_GET["S_platformID"];
+				
+				if($_GET["S_platformID"])
+				{
+					$result = mysql_query("SELECT * FROM Platforms WHERE platformID LIKE {$_GET["S_platformID"]}");
+				};
 			?>
 			<br>
 			Search by platform:
 			<?php
 				echo $_GET["S_platform"];
+				
+				if($_GET["S_platform"])
+				{
+					$result = mysql_query("SELECT * FROM Platforms WHERE platform LIKE {$_GET["S_platform"]}");
+				};
 			?>
 			<br>
 		</p>

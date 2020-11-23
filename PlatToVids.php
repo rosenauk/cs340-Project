@@ -99,11 +99,21 @@
 			Search by titleID:
 			<?php
 				echo $_GET["S_titleID"];
+				
+				if($_GET["S_titleID"])
+				{
+					$result = mysql_query("SELECT * FROM PlatToVids WHERE titleID LIKE {$_GET["S_titleID"]}");
+				};
 			?>
 			<br>
 			Search by platformID:
 			<?php
 				echo $_GET["S_platformID"];
+				
+				if($_GET["S_platformID"])
+				{
+					$result = mysql_query("SELECT * FROM PlatToVids WHERE platformID LIKE {$_GET["S_platformID"]}");
+				};
 			?>
 			<br>
 

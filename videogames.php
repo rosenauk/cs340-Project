@@ -28,6 +28,7 @@
 	padding: 20px;
 }
 
+
 </style>
 
 <html lang="en">
@@ -164,6 +165,11 @@
 				  <br>
 				  <input style="width = 100px" type="submit">
 				</form>
+				
+				<form>
+				  <label>Clear</label>
+				  <input style="width = 100px" type="submit" value="Clear">
+				</form>
 			</div>
 			
 			<br>
@@ -178,10 +184,9 @@
 				{
 					$result = mysql_query("SELECT * FROM Videogames WHERE titleID LIKE {$_GET["S_titleID"]}");
 				};
-				
-				
-				echo $_GET['titleID'];
+
 			?>
+			
 			<br>
 			Search by title:
 			<?php
@@ -195,6 +200,7 @@
 				};
 				
 			?>
+			
 			<br>
 			Search by releaseDate:
 			<?php
