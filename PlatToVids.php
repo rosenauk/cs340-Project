@@ -124,6 +124,7 @@
 		  <tr>
 			<th>titleID</th>
 			<th>platformID</th>
+			<th> </th>
 		  </tr>
 		  <?php
             while ($row = mysql_fetch_assoc($result)) {
@@ -131,6 +132,7 @@
                 "<tr>
 					<td>{$row['titleID']}</td>
 					<td>{$row['platformID']}</td>
+					<td><button>Edit</button></td>
 				</tr>";
             }
             ?>

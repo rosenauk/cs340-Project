@@ -195,6 +195,7 @@
 			<th>publisherID</th>
 			<th>titleID</th>
 			<th>pName</th>
+			<th> </th>
 		  </tr>
 		  <?php
             while ($row = mysql_fetch_assoc($result)) {
@@ -203,6 +204,7 @@
 					<td>{$row['publisherID']}</td>
 					<td>{$row['titleID']}</td>
 					<td>{$row['pName']}</td>
+					<td><button>Edit</button></td>
 				</tr>";
             }
             ?>

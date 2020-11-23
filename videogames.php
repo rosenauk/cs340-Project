@@ -171,16 +171,40 @@
 			Search by titleID:
 			<?php
 				echo $_GET["S_titleID"];
+				
+				
+				
+				if($_GET["S_titleID"])
+				{
+					$result = mysql_query("SELECT * FROM Videogames WHERE titleID LIKE {$_GET["S_titleID"]}");
+				};
+				
+				
+				echo $_GET['titleID'];
 			?>
 			<br>
 			Search by title:
 			<?php
 				echo $_GET["S_title"];
+				
+				
+				//not working yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				if($_GET["S_title"])
+				{
+					$result = mysql_query("SELECT * FROM Videogames WHERE title LIKE {$_GET["S_title"]}");
+				};
+				
 			?>
 			<br>
 			Search by releaseDate:
 			<?php
 				echo $_GET["S_releaseDate"];
+				
+				//not working yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				if($_GET["S_releaseDate"])
+				{
+					$result = mysql_query("SELECT * FROM Videogames WHERE releaseDate LIKE {$_GET["S_releaseDate"]}");
+				};
 			?>
 			<br>
 		</p>
@@ -202,6 +226,7 @@
 			<th>titleID</th>
 			<th>title</th>
 			<th>releaseDate</th>
+			<th> </th>
 		  </tr>
 		  
 		  <?php
@@ -211,6 +236,7 @@
 					<td>{$row['titleID']}</td>
 					<td>{$row['title']}</td>
 					<td>{$row['releaseDate']}</td>
+					<td><button>Edit</button></td>
 				</tr>";
             }
             ?>

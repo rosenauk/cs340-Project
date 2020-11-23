@@ -188,6 +188,7 @@
 			<th>ratingID</th>
 			<th>titleID</th>
 			<th>rating</th>
+			<th> </th>
 		  </tr>
 		  <?php
             while ($row = mysql_fetch_assoc($result)) {
@@ -196,6 +197,7 @@
 					<td>{$row['ratingID']}</td>
 					<td>{$row['titleID']}</td>
 					<td>{$row['rating']}</td>
+					<td><button>Edit</button></td>
 				</tr>";
             }
             ?>
