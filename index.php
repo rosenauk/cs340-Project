@@ -12,11 +12,11 @@
 
 <body>
 
-	<h1>
+	<h1 style="text-align:center;">
 		Video Game Organizer
 	</h1>
 	
-	<p>
+	<p style="text-align:center;">
 		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/">Home</a>
 		&nbsp
 		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.php">Videogames</a>
@@ -32,9 +32,15 @@
 	
 	<br>
 	
-	<h1>
+	<h1 style="text-align:center;">
 		Welcome to the page! <br> Click a link to get started.
 	</h1>
+	
+	<div>
+	
+	<img src="home.jpg" alt="Video game shelves" style="display:block; margin:auto;" height="500px" width="750px">
+	
+	</div>
 	
 
 

@@ -28,6 +28,17 @@
 	padding: 20px;
 }
 
+.row {
+  display: flex;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
 </style>
 
 <html lang="en">
@@ -48,11 +59,11 @@
 		$result = mysql_query("SELECT * FROM Ratings");
 		?>
 
-	<h1>
+	<h1 style="text-align:center;">
 		Ratings
 	</h1>
 	
-	<p>
+	<p style="text-align:center;">
 		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/">Home</a>
 		&nbsp
 		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.php">Videogames</a>
@@ -68,21 +79,19 @@
 	
 	<br>
 	
-	<p>
-		View, add to, and delete from the table here.
-	</p>
-	
+
 	<br>
-	
+<div class="row">
+	<div class="column" style="margin-left:15%;">	
 	<div class="section">
 		<p>
-			[Put stuff to add an entry here]
+			<h1 style="text-align:center;">Add An Entry</h1>
 			
 			<div class="container">
 				<form>
-				  <label>ratingID (use an integer)</label>
+				  <label>ratingID</label>
 				  <input type="number" name="A_ratingID"><br />
-				  <label>titleID (use an integer)</label>
+				  <label>titleID</label>
 				  <input type="number" name="A_titleID"><br />
 				  <label>rating</label>
 				  <input type="text" name="A_rating"><br />
@@ -105,10 +114,10 @@
 	
 	<div class="section">
 		<p>
-			[Put stuff to delete an entry here]
+			<h1 style="text-align:center;">Delete An Entry</h1>
 			<div class="container">
 				<form>
-				  <label>ratingID (use an integer)</label>
+				  <label>ratingID</label>
 				  <input type="number" name="D_ratingID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
@@ -129,27 +138,36 @@
 	
 	<div class="section">
 		<p>
-			[Put search here]
+			<h1 style="text-align:center;">Search The Table</h1>
 			<div class="container">
 				<form>
-				  <label>ratingID (use an integer)</label>
+				<br>
+				  <label>ratingID</label>
 				  <input type="number" name="S_ratingID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
 				</form>
 				
 				<form>
-				  <label>titleID </label>
+				<br>
+				  <label>titleID</label>
 				  <input type="number" name="S_titleID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
 				</form>
 				
 				<form>
+				<br>
 				  <label>rating</label>
 				  <input type="text" name="S_rating"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
+				</form>
+				
+				<form>
+				  <br>
+				  <br>
+				  <input style="width = 100px" type="submit" value="Clear">
 				</form>
 			</div>
 			
@@ -187,11 +205,16 @@
 			<br>
 		</p>
 	</div>
+	<br>
+	<br>
+	</div>
 	
 	<br>
 	
+
+	<div class="column">
 	<p>
-		[Put Table here] &nbsp (titleID FK from Videogames, rating, ratingID)
+		<h1>Table</h1>
 
 		
 		
@@ -218,9 +241,9 @@
             ?>
 		</table>
 	</p>
-
-
-
+	</div>
+	
+</div>
 </body>
 
 </html>

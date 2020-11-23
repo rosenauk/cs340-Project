@@ -28,6 +28,17 @@
 	padding: 20px;
 }
 
+.row {
+  display: flex;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
 </style>
 
 <html lang="en">
@@ -47,11 +58,11 @@
 		$result = mysql_query("SELECT * FROM PlatToVids");
 		?>
 
-	<h1>
+	<h1 style="text-align:center;">
 		PlatToVids
 	</h1>
 	
-	<p>
+	<p style="text-align:center;">
 		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/">Home</a>
 		&nbsp
 		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.php">Videogames</a>
@@ -67,29 +78,35 @@
 	
 	<br>
 	
-	<p>
-		View the table here.
-	</p>
-	
+
 	<br>
-	
+<div class="row">
+	<div class="column" style="margin-left:15%;">	
 	<div class="section">
 		<p>
-			[Put search here]
+			<h1 style="text-align:center;">Search The Table</h1>
 			
 			<div class="container">
 				<form>
-				  <label>titleID (use an integer)</label>
+				<br>
+				  <label>titleID</label>
 				  <input type="number" name="S_titleID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
 				</form>
 				
 				<form>
-				  <label>platformID </label>
+				<br>
+				  <label>platformID</label>
 				  <input type="number" name="S_platformID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
+				</form>
+				
+				<form>
+				  <br>
+				  <br>
+				  <input style="width = 100px" type="submit" value="Clear">
 				</form>
 
 			</div>
@@ -119,11 +136,18 @@
 
 		</p>
 	</div>
+	<br>
+	<br>
+	<br>
+	
+	</div>
 	
 	<br>
 	
+
+	<div class="column">
 	<p>
-		[Put Table here] &nbsp (titleID, platformID) [Every platform doesn't need a video game title but normally will]
+		<h1>Table</h1>
 		
 
 		
@@ -148,8 +172,9 @@
             ?>
 		</table>
 	</p>
-
-
+	</div>
+	
+</div>
 </body>
 
 </html>
