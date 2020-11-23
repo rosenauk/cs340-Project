@@ -66,6 +66,10 @@ INSERT INTO `Platforms` VALUES (1,'Xbox One'),(2,'PlayStation 4'),(3,'Nintendo S
 UNLOCK TABLES;
 
 
+
+
+
+
 --
 -- Table structure for table `PlatToVids`
 --
@@ -75,7 +79,7 @@ DROP TABLE IF EXISTS `PlatToVids`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PlatToVids` (
   `titleID` int(11) NOT NULL DEFAULT '0',
-  `platformID` int(11) NOT NULL DEFAULT '0',
+  `platformID` int(11) DEFAULT '0',
   PRIMARY KEY (`titleID`,`platformID`),
   KEY `platformID` (`platformID`),
   CONSTRAINT `PlatToVids_ibfk_1` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -92,7 +96,6 @@ LOCK TABLES `PlatToVids` WRITE;
 INSERT INTO `PlatToVids` VALUES (1,1),(1,2),(1,3),(1,4),(2,1),(2,2),(2,4),(3,3),(3,4);
 /*!40000 ALTER TABLE `PlatToVids` ENABLE KEYS */;
 UNLOCK TABLES;
-
 
 
 
@@ -139,7 +142,6 @@ LOCK TABLES `Ratings` WRITE;
 INSERT INTO `Ratings` 
 VALUES (1, 1, 'E10+'), (2,2, 'M'), (3, 3, 'E');
 UNLOCK TABLES;
-
 
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

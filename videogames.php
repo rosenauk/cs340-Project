@@ -1,6 +1,38 @@
+<?php
+ $username = "cs340_rosenauk";
+ $password = "8003";
+ $host = "classmysql.engr.oregonstate.edu";
+ $connector = mysql_connect($host, $username, $password)
+    or die("Unable to connect");
+ $selected = mysql_select_db("cs340_rosenauk", $connector)
+    or die("Unable to connect");
+ ?>
+
 <!doctype html>
 
+<style>
+
+.container {
+  width: 500px;
+  clear: both;
+}
+
+.container input {
+  width: 100%;
+  clear: both;
+}
+
+.section {
+	border-style: solid;
+	width: fit-content;
+	padding: 20px;
+}
+
+</style>
+
 <html lang="en">
+
+
 <head>
   <meta charset="utf-8">
 
@@ -12,6 +44,11 @@
 
 <body>
 
+		<?php
+		//execute the SQL query and return records
+		$result = mysql_query("SELECT * FROM Videogames");
+		?>
+
 	<h1>
 		Videogames
 	</h1>
@@ -19,15 +56,15 @@
 	<p>
 		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/">Home</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.html">Videogames</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.php">Videogames</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/publishers.html">Publishers</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/publishers.php">Publishers</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/platforms.html">Platforms</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/platforms.php">Platforms</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.html">Ratings</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.php">Ratings</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/PlatToVids.html">PlatToVids</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/PlatToVids.php">PlatToVids</a>
 	</p>
 	
 	<br>
@@ -38,26 +75,124 @@
 	
 	<br>
 	
-	<p>
-		[Put stuff to add an entry here]
-	</p>
+	<div class="section">
+		<p>
+			[Put stuff to add an entry here]
+			
+			<div class="container">
+				<form>
+				  <label>titleID (use an integer)</label>
+				  <input type="number" name="A_titleID"><br />
+				  <label>title (title of the game)</label>
+				  <input type="text" name="A_title"><br />
+				  <label>releaseDate</label>
+				  <input type="date" name="A_releaseDate"><br />
+				  <br>
+				  <input style="width = 100px" type="submit">
+				</form>
+			</div>
+			
+			<br>
+			
+			You want to add:
+			<?php
+				echo $_GET["A_title"];
+
+				/*$sql = "INSERT INTO Videogames (titleID, title, releaseDate)
+					VALUES ('".$_POST["A_titleID"]."','".$_POST["A_title"]."','".$_POST["A_releaseDate"]."')";*/
+			?>
+			
+			
+			
+
+			
+		</p>
+	</div>
+	
+	
 	
 	<br>
 	
-	<p>
-		[Put stuff to delete an entry here]
-	</p>
+	
+	<div class="section">
+		<p>
+			[Put stuff to delete an entry here]
+			<div class="container">
+				<form>
+				  <label>titleID (use an integer)</label>
+				  <input type="number" name="D_titleID"><br />
+				  <br>
+				  <input style="width = 100px" type="submit">
+				</form>
+			</div>
+			
+			<br>
+			
+			titleID of game you want to delete:
+			<?php
+				echo $_GET["D_titleID"];
+
+			?>
+		</p>
+	</div>
+	
 	
 	<br>
 	
-	<p>
-		[Put search here]
-	</p>
+	<div class="section">
+		<p>
+			[Put search here]
+			
+			<div class="container">
+				<form>
+				  <label>titleID (use an integer)</label>
+				  <input type="number" name="S_titleID"><br />
+				  <br>
+				  <input style="width = 100px" type="submit">
+				</form>
+				
+				<form>
+				  <label>title </label>
+				  <input type="text" name="S_title"><br />
+				  <br>
+				  <input style="width = 100px" type="submit">
+				</form>
+				
+				<form>
+				  <label>releaseDate</label>
+				  <input type="date" name="S_releaseDate"><br />
+				  <br>
+				  <input style="width = 100px" type="submit">
+				</form>
+			</div>
+			
+			<br>
+			
+			Search by titleID:
+			<?php
+				echo $_GET["S_titleID"];
+			?>
+			<br>
+			Search by title:
+			<?php
+				echo $_GET["S_title"];
+			?>
+			<br>
+			Search by releaseDate:
+			<?php
+				echo $_GET["S_releaseDate"];
+			?>
+			<br>
+		</p>
+	</div>
 	
 	<br>
 	
 	<p>
 		[Put Table here]  &nbsp (titleID, title, releaseDate)
+		
+		
+		
 		<table style=" border:1px solid black; border-collapse: collapse; text-align: left;background-color: #F5F5F5;">
 			
 			<col width= "100px" />
@@ -68,19 +203,24 @@
 			<th>title</th>
 			<th>releaseDate</th>
 		  </tr>
-		  <tr>
-			<td>1</td>
-			<td>Minecraft</td>
-			<td>2009-05-17</td>
-		  </tr>
-		  <tr>
-			<td>2</td>
-			<td>Grand Theft Auto V</td>
-			<td>2013-09-17</td>
-		  </tr>
+		  
+		  <?php
+            while ($row = mysql_fetch_assoc($result)) {
+                echo
+                "<tr>
+					<td>{$row['titleID']}</td>
+					<td>{$row['title']}</td>
+					<td>{$row['releaseDate']}</td>
+				</tr>";
+            }
+            ?>
+
+		  
 		</table>
 	</p>
 
 </body>
 
 </html>
+
+<?php mysql_close($connector); ?>

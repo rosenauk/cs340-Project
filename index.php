@@ -19,34 +19,24 @@
 	<p>
 		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/">Home</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.html">Videogames</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.php">Videogames</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/publishers.html">Publishers</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/publishers.php">Publishers</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/platforms.html">Platforms</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/platforms.php">Platforms</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.html">Ratings</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.php">Ratings</a>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/PlatToVids.html">PlatToVids</a>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/PlatToVids.php">PlatToVids</a>
 	</p>
 	
 	<br>
 	
-	<p>
-		View the table here.
-	</p>
+	<h1>
+		Welcome to the page! <br> Click a link to get started.
+	</h1>
 	
-	<br>
-	
-	<p>
-		[Put search here]
-	</p>
-	
-	<br>
-	
-	<p>
-		[Put Table here] &nbsp (all together)
-	</p>
+
 
 
 
