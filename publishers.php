@@ -1,11 +1,5 @@
 <?php
- $username = "cs340_rosenauk";
- $password = "8003";
- $host = "classmysql.engr.oregonstate.edu";
- $connector = mysql_connect($host, $username, $password)
-    or die("Unable to connect");
- $selected = mysql_select_db("cs340_rosenauk", $connector)
-    or die("Unable to connect");
+ include_once 'dbhost.php';
  ?>
 
 <!doctype html>
@@ -54,17 +48,35 @@
 	</h1>
 	
 	<p>
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/">Home</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/index.php") . "'>Home</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.php">Videogames</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/videogames.php") . "'>Videogames</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/publishers.php">Publishers</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/publishers.php") . "'>Publishers</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/platforms.php">Platforms</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/platforms.php") . "'>Platforms</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.php">Ratings</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/ratings.php") . "'>Ratings</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/PlatToVids.php">PlatToVids</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/PlatToVids.php") . "'>PlatToVids</a>";
+		?>
 	</p>
 	
 	<br>
@@ -110,7 +122,7 @@
 			[Put stuff to delete an entry here]
 			
 			<div class="container">
-				<form>
+				<form method="post">
 				  <label>publisherID (use an integer)</label>
 				  <input type="number" name="D_publisherID"><br />
 				  <br>
@@ -123,7 +135,11 @@
 			titleID of publisher you want to delete:
 			<?php
 				echo $_GET["D_publisherID"];
-
+				if(isset($_POST["D_publisherID"]) and is_numeric($_POST["D_publisherID"]))
+				{
+					$platform_id = $_POST['D_publisherID'];
+					$sql = mysql_query("DELETE FROM `Publishers` WHERE `publisherID` = $platform_id");
+				}
 			?>
 			
 			
