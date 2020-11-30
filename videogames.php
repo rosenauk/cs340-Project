@@ -279,6 +279,43 @@
 				  <br>
 				  <input style="width = 100px" type="submit" value="Clear">
 				</form>
+				
+				
+				
+				<!--
+				<form>
+				<br>
+				  <label>titleID</label>
+				  <input type="number" name="S_titleID"><br />
+				
+				<br>
+				  <label>title </label>
+				  <input type="text" name="S_title"><br />
+
+				<br>
+				  <label>releaseDate</label>
+				  <input type="date" name="S_releaseDate"><br />
+
+				<br>
+				  <label>publisherID</label>
+				  <input type="number" name="S_publisherID"><br />
+
+				<br>
+				  <label>ratingID</label>
+				  <input type="number" name="S_ratingID"><br />
+				  <br>
+				  
+				  <input style="width = 100px" type="submit">
+				</form>
+
+				
+				<form>
+				  <br>
+				  <br>
+				  <input style="width = 100px" type="submit" value="Clear">
+				</form>
+				-->
+				
 			</div>
 			
 			<br>
@@ -289,6 +326,7 @@
 				
 				if($_GET["S_titleID"])
 				{
+					//$result = mysql_query("SELECT * FROM Videogames WHERE titleID LIKE {$_GET["S_titleID"]}");
 					$result = mysql_query("SELECT * FROM Videogames WHERE titleID LIKE {$_GET["S_titleID"]}");
 				};
 
@@ -303,7 +341,8 @@
 				if($_GET["S_title"])
 				{
 					$string = $_GET["S_title"];
-					$result = mysql_query("SELECT * FROM Videogames WHERE title LIKE '{$_GET["S_title"]}'");
+					//$result = mysql_query("SELECT * FROM Videogames WHERE title LIKE '{$_GET["S_title"]}'");
+					$result = mysql_query("SELECT * FROM Videogames WHERE title LIKE '%{$_GET["S_title"]}%'");
 				};
 				
 			?>
