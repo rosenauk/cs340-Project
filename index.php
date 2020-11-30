@@ -1,3 +1,6 @@
+<?php
+	include_once 'dbhost.php';
+?>
 <!doctype html>
 
 <html lang="en">
@@ -16,18 +19,36 @@
 		Video Game Organizer
 	</h1>
 	
-	<p style="text-align:center;">
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/">Home</a>
+	<p>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/index.php") . "'>Home</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.php">Videogames</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/videogames.php") . "'>Videogames</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/publishers.php">Publishers</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/publishers.php") . "'>Publishers</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/platforms.php">Platforms</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/platforms.php") . "'>Platforms</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.php">Ratings</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/ratings.php") . "'>Ratings</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/PlatToVids.php">PlatToVids</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/PlatToVids.php") . "'>PlatToVids</a>";
+		?>
 	</p>
 	
 	<br>

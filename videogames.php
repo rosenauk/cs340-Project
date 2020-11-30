@@ -1,11 +1,5 @@
 <?php
- $username = "cs340_rosenauk";
- $password = "8003";
- $host = "classmysql.engr.oregonstate.edu";
- $connector = mysql_connect($host, $username, $password)
-    or die("Unable to connect");
- $selected = mysql_select_db("cs340_rosenauk", $connector)
-    or die("Unable to connect");
+ include_once 'dbhost.php';
  ?>
 
 <!doctype html>
@@ -66,17 +60,35 @@
 	</h1>
 	
 	<p style="text-align:center;">
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/">Home</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/index.php") . "'>Home</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.php">Videogames</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/videogames.php") . "'>Videogames</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/publishers.php">Publishers</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/publishers.php") . "'>Publishers</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/platforms.php">Platforms</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/platforms.php") . "'>Platforms</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.php">Ratings</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/ratings.php") . "'>Ratings</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/PlatToVids.php">PlatToVids</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/PlatToVids.php") . "'>PlatToVids</a>";
+		?>
 	</p>
 	
 	<br>
@@ -198,6 +210,8 @@
 			<div class="container">
 				<form>
 				  <label>titleID</label>
+				<!-- <form method="post">
+				  <label>titleID (use an integer)</label> -->
 				  <input type="number" name="D_titleID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
@@ -206,7 +220,7 @@
 			
 			<br>
 			
-			titleID of game you want to delete:
+			platformID of game you want to delete:
 			<?php
 				echo $_GET["D_titleID"];
 				
@@ -223,7 +237,13 @@
 					';
 				}
 
+				/* if(isset($_POST["D_titleID"]) and is_numeric($_POST["D_titleID"]))
+				{
+					$title_id = $_POST['D_titleID'];
+					$sql = mysql_query("DELETE FROM `Videogames` WHERE `titleID` = $title_id");
+				} */
 			?>
+
 		</p>
 	</div>
 	

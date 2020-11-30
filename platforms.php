@@ -1,11 +1,5 @@
 <?php
- $username = "cs340_rosenauk";
- $password = "8003";
- $host = "classmysql.engr.oregonstate.edu";
- $connector = mysql_connect($host, $username, $password)
-    or die("Unable to connect");
- $selected = mysql_select_db("cs340_rosenauk", $connector)
-    or die("Unable to connect");
+ include_once 'dbhost.php';
  ?>
 
 <!doctype html>
@@ -65,18 +59,36 @@
 		Platforms
 	</h1>
 	
-	<p style="text-align:center;">
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/">Home</a>
+	<p style="text-align:center;>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/index.php") . "'>Home</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.php">Videogames</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/videogames.php") . "'>Videogames</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/publishers.php">Publishers</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/publishers.php") . "'>Publishers</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/platforms.php">Platforms</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/platforms.php") . "'>Platforms</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.php">Ratings</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/ratings.php") . "'>Ratings</a>";
+		?>
 		&nbsp
-		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/PlatToVids.php">PlatToVids</a>
+		<?php
+			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
+			. urlencode($person) . "/cs340/PlatToVids.php") . "'>PlatToVids</a>";
+		?>
 	</p>
 	
 	<br>
