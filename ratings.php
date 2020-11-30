@@ -146,6 +146,8 @@
 			<div class="container">
 				<form>
 				  <label>ratingID</label>
+				<!--<form method="post">
+				  <label>ratingID (use an integer)</label>-->
 				  <input type="number" name="D_ratingID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
@@ -177,6 +179,13 @@
 					';
 				}
 
+				/*
+				 if(isset($_POST["D_ratingID"]) and is_numeric($_POST["D_ratingID"]))
+				{
+					$rating_id = $_POST['D_ratingID'];
+					$sql = mysql_query("DELETE FROM `Ratings` WHERE `ratingID` = $rating_id");
+				} 
+				*/
 			?>
 		</p>
 	</div>

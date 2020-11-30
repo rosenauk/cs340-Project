@@ -210,6 +210,8 @@
 			<div class="container">
 				<form>
 				  <label>titleID</label>
+				<!-- <form method="post">
+				  <label>titleID (use an integer)</label> -->
 				  <input type="number" name="D_titleID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
@@ -241,6 +243,11 @@
 					';
 				}
 
+				/* if(isset($_POST["D_titleID"]) and is_numeric($_POST["D_titleID"]))
+				{
+					$title_id = $_POST['D_titleID'];
+					$sql = mysql_query("DELETE FROM `Videogames` WHERE `titleID` = $title_id");
+				} */
 			?>
 
 		</p>

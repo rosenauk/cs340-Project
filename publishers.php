@@ -149,6 +149,8 @@
 			<div class="container">
 				<form>
 				  <label>publisherID</label>
+				<!--<form method="post">
+				  <label>publisherID (use an integer)</label>-->
 				  <input type="number" name="D_publisherID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
