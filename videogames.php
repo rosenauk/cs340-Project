@@ -97,8 +97,15 @@
 				  -->
 				  <label>title</label>
 				  <input type="text" name="A_title"><br />
+				  <br>
 				  <label>releaseDate</label>
 				  <input type="date" name="A_releaseDate"><br />
+				  <br>
+				  <label>publisherID (optional)</label>
+				  <input type="number" name="A_publisherID"><br />
+				  <br>
+				  <label>ratingID (optional)</label>
+				  <input type="number" name="A_ratingID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
 				</form>
@@ -110,9 +117,57 @@
 			<?php
 				echo $_GET["A_title"];
 
-				if($_GET["A_title"] && $_GET["A_releaseDate"])	
+				if($_GET["A_title"] && $_GET["A_publisherID"] && $_GET["A_ratingID"])	
 				{
-					$select="INSERT INTO Videogames(title,releaseDate) VALUES ('{$_GET["A_title"]}','{$_GET["A_releaseDate"]}')";
+					
+					$select="INSERT INTO Videogames(title,releaseDate,publisherID,ratingID) VALUES ('{$_GET["A_title"]}','{$_GET["A_releaseDate"]}','{$_GET["A_publisherID"]}','{$_GET["A_ratingID"]}')";
+					$sql=mysql_query($select);
+					
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
+				
+				else if($_GET["A_title"] && $_GET["A_publisherID"])	
+				{
+					$select="INSERT INTO Videogames(title,releaseDate,publisherID,ratingID) VALUES ('{$_GET["A_title"]}','{$_GET["A_releaseDate"]}','{$_GET["A_publisherID"]}',NULL)";
+					$sql=mysql_query($select);
+					
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
+				
+				else if($_GET["A_title"] && $_GET["A_ratingID"])	
+				{
+					
+					$select="INSERT INTO Videogames(title,releaseDate,publisherID,ratingID) VALUES ('{$_GET["A_title"]}','{$_GET["A_releaseDate"]}',NULL,'{$_GET["A_ratingID"]}')";
+					$sql=mysql_query($select);
+					
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
+				
+				else if($_GET["A_title"])	
+				{
+					
+					$select="INSERT INTO Videogames(title,releaseDate,publisherID,ratingID) VALUES ('{$_GET["A_title"]}','{$_GET["A_releaseDate"]}',NULL,NULL)";
 					$sql=mysql_query($select);
 					
 					
@@ -204,6 +259,22 @@
 				</form>
 				
 				<form>
+				<br>
+				  <label>publisherID</label>
+				  <input type="number" name="S_publisherID"><br />
+				  <br>
+				  <input style="width = 100px" type="submit">
+				</form>
+				
+				<form>
+				<br>
+				  <label>ratingID</label>
+				  <input type="number" name="S_ratingID"><br />
+				  <br>
+				  <input style="width = 100px" type="submit">
+				</form>
+				
+				<form>
 				  <br>
 				  <br>
 				  <input style="width = 100px" type="submit" value="Clear">
@@ -249,6 +320,30 @@
 				};
 			?>
 			
+			<br>
+			Search by publisherID:
+			<?php
+				echo $_GET["S_publisherID"];
+				
+				if($_GET["S_publisherID"])
+				{
+					$result = mysql_query("SELECT * FROM Videogames WHERE publisherID LIKE {$_GET["S_publisherID"]}");
+				};
+
+			?>
+			
+			<br>
+			Search by ratingID:
+			<?php
+				echo $_GET["S_ratingID"];
+				
+				if($_GET["S_ratingID"])
+				{
+					$result = mysql_query("SELECT * FROM Videogames WHERE ratingID LIKE {$_GET["S_ratingID"]}");
+				};
+
+			?>
+			
 		</p>
 	</div>
 	<br>
@@ -271,10 +366,14 @@
 			<col width= "100px" />
 			<col width= "200px" />
 			<col width= "125px" />
+			<col width= "125px" />
+			<col width= "125px" />
 		  <tr>
 			<th>titleID</th>
 			<th>title</th>
 			<th>releaseDate</th>
+			<th>publisherID</th>
+			<th>ratingID</th>
 			<th> </th>
 		  </tr>
 		  
@@ -285,6 +384,8 @@
 					<td>{$row['titleID']}</td>
 					<td>{$row['title']}</td>
 					<td>{$row['releaseDate']}</td>
+					<td>{$row['publisherID']}</td>
+					<td>{$row['ratingID']}</td>
 					<td><button>Edit</button></td>
 				</tr>";
             }

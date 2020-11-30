@@ -26,7 +26,13 @@ CREATE TABLE `Videogames` (
   `titleID` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `releaseDate` date,
-  PRIMARY KEY (`titleID`)
+  `publisherID` int(11),
+  `ratingID` int(11),
+  PRIMARY KEY (`titleID`),
+  Key `publisherID` (`publisherID`),
+  Key `ratingID` (`ratingID`),
+  CONSTRAINT `Videogames_publisherID_fk` FOREIGN KEY (`publisherID`) REFERENCES `Publishers` (`publisherID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `Videogames_ratingID_fk` FOREIGN KEY (`ratingID`) REFERENCES `Ratings` (`ratingID`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -36,7 +42,7 @@ CREATE TABLE `Videogames` (
 
 LOCK TABLES `Videogames` WRITE;
 /*!40000 ALTER TABLE `Videogames` DISABLE KEYS */;
-INSERT INTO `Videogames` VALUES (1,'Minecraft','2009-5-17'),(2,'Grand Theft Auto V','2013-9-17'),(3,'Tetris','1984-6-6');
+INSERT INTO `Videogames` VALUES (1,'Minecraft','2009-5-17',1,1),(2,'Grand Theft Auto V','2013-9-17',2,2),(3,'Tetris','1984-6-6',3,3);
 /*!40000 ALTER TABLE `Videogames` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,18 +117,15 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `Publishers`;
 CREATE TABLE `Publishers` (
   `publisherID` int NOT NULL AUTO_INCREMENT,
-  `titleID` int NOT NULL,
   `pName` varchar(100) NOT NULL,
   CONSTRAINT `unique_pName` UNIQUE (`pName`),
-  PRIMARY KEY (`publisherID`),
-  Key `titleID` (`titleID`),
-  CONSTRAINT `publishers_titleID_fk` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`publisherID`)
 );
 
 
 LOCK TABLES `Publishers` WRITE;
 INSERT INTO `Publishers` 
-VALUES (1, 1, 'Mojang Studios'),(2, 2, 'Rockstar Games'),(3, 3, 'Nintendo');
+VALUES (1, 'Mojang Studios'),(2, 'Rockstar Games'),(3, 'Nintendo');
 UNLOCK TABLES;
 
 
@@ -130,17 +133,15 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `Ratings`;
 CREATE TABLE `Ratings` (
   `ratingID` int NOT NULL AUTO_INCREMENT,
-  `titleID` int,
   `rating` varchar(100) NOT NULL,
-  PRIMARY KEY (`ratingID`),
-  Key `titleID` (`titleID`),
-  CONSTRAINT `ratings_titleID_fk` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `unique_rating` UNIQUE (`rating`),
+  PRIMARY KEY (`ratingID`)
 );
 
 
 LOCK TABLES `Ratings` WRITE;
 INSERT INTO `Ratings` 
-VALUES (1, 1, 'E10+'), (2,2, 'M'), (3, 3, 'E');
+VALUES (1, 'E10+'), (2, 'M'), (3, 'E');
 UNLOCK TABLES;
 
 

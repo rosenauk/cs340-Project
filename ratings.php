@@ -93,8 +93,6 @@
 				  <label>ratingID</label>
 				  <input type="number" name="A_ratingID"><br />
 				  -->
-				  <label>titleID</label>
-				  <input type="number" name="A_titleID"><br />
 				  <label>rating</label>
 				  <input type="text" name="A_rating"><br />
 				  <br>
@@ -108,10 +106,10 @@
 			<?php
 				echo $_GET["A_rating"];
 				
-				//Does not work !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				if($_GET["A_titleID"] && $_GET["A_rating"])	
+				
+				if($_GET["A_rating"])	
 				{
-					$select="INSERT INTO Ratings(titleID,rating) VALUES ('{$_GET["A_titleID"]}','{$_GET["A_rating"]}')";
+					$select="INSERT INTO Ratings(rating) VALUES ('{$_GET["A_rating"]}')";
 					$sql=mysql_query($select);
 					
 					
@@ -181,14 +179,6 @@
 				
 				<form>
 				<br>
-				  <label>titleID</label>
-				  <input type="number" name="S_titleID"><br />
-				  <br>
-				  <input style="width = 100px" type="submit">
-				</form>
-				
-				<form>
-				<br>
 				  <label>rating</label>
 				  <input type="text" name="S_rating"><br />
 				  <br>
@@ -211,16 +201,6 @@
 				if($_GET["S_ratingID"])
 				{
 					$result = mysql_query("SELECT * FROM Ratings WHERE ratingID LIKE {$_GET["S_ratingID"]}");
-				};
-			?>
-			<br>
-			Search by titleID:
-			<?php
-				echo $_GET["S_titleID"];
-				
-				if($_GET["S_titleID"])
-				{
-					$result = mysql_query("SELECT * FROM Ratings WHERE titleID LIKE {$_GET["S_titleID"]}");
 				};
 			?>
 			<br>
@@ -252,10 +232,8 @@
 		<table style="border:1px solid black; border-collapse: collapse; text-align: left;background-color: #F5F5F5;">
 			<col width= "100px" />
 			<col width= "100px" />
-			<col width= "100px" />
 		  <tr>
 			<th>ratingID</th>
-			<th>titleID</th>
 			<th>rating</th>
 			<th> </th>
 		  </tr>
@@ -264,7 +242,6 @@
                 echo
                 "<tr>
 					<td>{$row['ratingID']}</td>
-					<td>{$row['titleID']}</td>
 					<td>{$row['rating']}</td>
 					<td><button>Edit</button></td>
 				</tr>";

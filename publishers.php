@@ -57,7 +57,7 @@
 
 <?php
 		//execute the SQL query and return records
-		$result = mysql_query("SELECT * FROM Publishers");
+		$result = mysql_query("SELECT * FROM Publishers ORDER BY publisherID ASC");
 		?>
 
 	<h1 style="text-align:center;">
@@ -93,8 +93,6 @@
 				  <label>publisherID</label>
 				  <input type="number" name="A_publisherID"><br />
 				  -->
-				  <label>titleID</label>
-				  <input type="text" name="A_titleID"><br />
 				  
 				  <label>pName</label>
 				  <input type="text" name="A_pName"><br />
@@ -110,10 +108,10 @@
 				echo $_GET["A_pName"];
 				
 				
-				//Does not work !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				if($_GET["A_titleID"] && $_GET["A_pName"])	
+				
+				if($_GET["A_pName"])	
 				{
-					$select="INSERT INTO Publishers(titleID,pName) VALUES ('{$_GET["A_titleID"]}','{$_GET["A_pName"]}')";
+					$select="INSERT INTO Publishers(pName) VALUES ('{$_GET["A_pName"]}')";
 					$sql=mysql_query($select);
 					
 					
@@ -187,14 +185,6 @@
 				
 				<form>
 				<br>
-				  <label>titleID</label>
-				  <input type="number" name="S_titleID"><br />
-				  <br>
-				  <input style="width = 100px" type="submit">
-				</form>
-				
-				<form>
-				<br>
 				  <label>pName</label>
 				  <input type="text" name="S_pName"><br />
 				  <br>
@@ -220,16 +210,6 @@
 				};
 				
 				
-			?>
-			<br>
-			Search by titleID:
-			<?php
-				echo $_GET["S_titleID"];
-				
-				if($_GET["S_titleID"])
-				{
-					$result = mysql_query("SELECT * FROM Publishers WHERE titleID LIKE '{$_GET["S_titleID"]}'");
-				};
 			?>
 			<br>
 			Search by pName:
@@ -261,11 +241,9 @@
 		
 		<table style=" border:1px solid black; border-collapse: collapse; text-align: left;background-color: #F5F5F5;">
 			<col width= "125px" />
-			<col width= "100px" />
 			<col width= "150px" />
 		  <tr>
 			<th>publisherID</th>
-			<th>titleID</th>
 			<th>pName</th>
 			<th> </th>
 		  </tr>
@@ -274,7 +252,6 @@
                 echo
                 "<tr>
 					<td>{$row['publisherID']}</td>
-					<td>{$row['titleID']}</td>
 					<td>{$row['pName']}</td>
 					<td><button>Edit</button></td>
 				</tr>";
