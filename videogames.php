@@ -91,8 +91,10 @@
 			
 			<div class="container">
 				<form>
+				<!--
 				  <label>titleID</label>
 				  <input type="number" name="A_titleID"><br />
+				  -->
 				  <label>title</label>
 				  <input type="text" name="A_title"><br />
 				  <label>releaseDate</label>
@@ -108,11 +110,22 @@
 			<?php
 				echo $_GET["A_title"];
 
-				/*$sql = "INSERT INTO Videogames (titleID, title, releaseDate)
-					VALUES ('".$_POST["A_titleID"]."','".$_POST["A_title"]."','".$_POST["A_releaseDate"]."')";*/
+				if($_GET["A_title"] && $_GET["A_releaseDate"])	
+				{
+					$select="INSERT INTO Videogames(title,releaseDate) VALUES ('{$_GET["A_title"]}','{$_GET["A_releaseDate"]}')";
+					$sql=mysql_query($select);
+					
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
+				
 			?>
-			
-			
 			
 
 			
@@ -141,6 +154,19 @@
 			titleID of game you want to delete:
 			<?php
 				echo $_GET["D_titleID"];
+				
+				if($_GET["D_titleID"])
+				{
+					$sql = mysql_query("DELETE FROM `Videogames` WHERE `titleID` = '{$_GET["D_titleID"]}'");
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
 
 			?>
 		</p>
@@ -190,8 +216,6 @@
 			<?php
 				echo $_GET["S_titleID"];
 				
-				
-				
 				if($_GET["S_titleID"])
 				{
 					$result = mysql_query("SELECT * FROM Videogames WHERE titleID LIKE {$_GET["S_titleID"]}");
@@ -205,10 +229,10 @@
 				echo $_GET["S_title"];
 				
 				
-				//not working yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				if($_GET["S_title"])
 				{
-					$result = mysql_query("SELECT * FROM Videogames WHERE title LIKE {$_GET["S_title"]}");
+					$string = $_GET["S_title"];
+					$result = mysql_query("SELECT * FROM Videogames WHERE title LIKE '{$_GET["S_title"]}'");
 				};
 				
 			?>
@@ -218,10 +242,10 @@
 			<?php
 				echo $_GET["S_releaseDate"];
 				
-				//not working yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				
 				if($_GET["S_releaseDate"])
 				{
-					$result = mysql_query("SELECT * FROM Videogames WHERE releaseDate LIKE {$_GET["S_releaseDate"]}");
+					$result = mysql_query("SELECT * FROM Videogames WHERE releaseDate LIKE '{$_GET["S_releaseDate"]}'");
 				};
 			?>
 			

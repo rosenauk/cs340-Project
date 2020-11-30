@@ -89,8 +89,10 @@
 			
 			<div class="container">
 				<form>
+				<!--
 				  <label>ratingID</label>
 				  <input type="number" name="A_ratingID"><br />
+				  -->
 				  <label>titleID</label>
 				  <input type="number" name="A_titleID"><br />
 				  <label>rating</label>
@@ -105,6 +107,22 @@
 			You want to add:
 			<?php
 				echo $_GET["A_rating"];
+				
+				//Does not work !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				if($_GET["A_titleID"] && $_GET["A_rating"])	
+				{
+					$select="INSERT INTO Ratings(titleID,rating) VALUES ('{$_GET["A_titleID"]}','{$_GET["A_rating"]}')";
+					$sql=mysql_query($select);
+					
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
 
 			?>
 		</p>
@@ -129,6 +147,19 @@
 			ratingID of rating you want to delete:
 			<?php
 				echo $_GET["D_ratingID"];
+				
+				if($_GET["D_ratingID"])
+				{
+					$sql = mysql_query("DELETE FROM `Ratings` WHERE `ratingID` = '{$_GET["D_ratingID"]}'");
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
 
 			?>
 		</p>
@@ -199,7 +230,7 @@
 				
 				if($_GET["S_rating"])
 				{
-					$result = mysql_query("SELECT * FROM Ratings WHERE rating LIKE {$_GET["S_rating"]}");
+					$result = mysql_query("SELECT * FROM Ratings WHERE rating LIKE '{$_GET["S_rating"]}'");
 				};
 			?>
 			<br>

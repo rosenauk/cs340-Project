@@ -91,8 +91,10 @@
 			
 			<div class="container">
 				<form>
+				<!--
 				  <label>platformID</label>
 				  <input type="number" name="A_platformID"><br />
+				  -->
 				  <label>platform</label>
 				  <input type="text" name="A_platform"><br />
 				  <br>
@@ -105,6 +107,21 @@
 			You want to add:
 			<?php
 				echo $_GET["A_platform"];
+				
+				if($_GET["A_platform"])	
+				{
+					$select="INSERT INTO Platforms(platform) VALUES ('{$_GET["A_platform"]}')";
+					$sql=mysql_query($select);
+					
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
 
 			?>
 			
@@ -132,6 +149,19 @@
 			platformID of game you want to delete:
 			<?php
 				echo $_GET["D_platformID"];
+				
+				if($_GET["D_platformID"])
+				{
+					$sql = mysql_query("DELETE FROM `Platforms` WHERE `platformID` = '{$_GET["D_platformID"]}'");
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
 
 			?>
 			
@@ -187,7 +217,7 @@
 				
 				if($_GET["S_platform"])
 				{
-					$result = mysql_query("SELECT * FROM Platforms WHERE platform LIKE {$_GET["S_platform"]}");
+					$result = mysql_query("SELECT * FROM Platforms WHERE platform LIKE '{$_GET["S_platform"]}'");
 				};
 			?>
 			

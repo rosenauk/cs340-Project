@@ -89,10 +89,13 @@
 			
 			<div class="container">
 				<form>
-				  <label>publisherID (use an integer)</label>
+				<!--
+				  <label>publisherID</label>
 				  <input type="number" name="A_publisherID"><br />
-				  <label>titleID (title of the game)</label>
+				  -->
+				  <label>titleID</label>
 				  <input type="text" name="A_titleID"><br />
+				  
 				  <label>pName</label>
 				  <input type="text" name="A_pName"><br />
 				  <br>
@@ -104,8 +107,24 @@
 			
 			You want to add:
 			<?php
-				echo $_GET["A_publisherID"];
-
+				echo $_GET["A_pName"];
+				
+				
+				//Does not work !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				if($_GET["A_titleID"] && $_GET["A_pName"])	
+				{
+					$select="INSERT INTO Publishers(titleID,pName) VALUES ('{$_GET["A_titleID"]}','{$_GET["A_pName"]}')";
+					$sql=mysql_query($select);
+					
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
 			?>
 			
 		</p>
@@ -119,7 +138,7 @@
 			
 			<div class="container">
 				<form>
-				  <label>publisherID (use an integer)</label>
+				  <label>publisherID</label>
 				  <input type="number" name="D_publisherID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
@@ -131,6 +150,19 @@
 			titleID of publisher you want to delete:
 			<?php
 				echo $_GET["D_publisherID"];
+				
+				if($_GET["D_publisherID"])
+				{
+					$sql = mysql_query("DELETE FROM `Publishers` WHERE `publisherID` = '{$_GET["D_publisherID"]}'");
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
 
 			?>
 			
@@ -196,7 +228,7 @@
 				
 				if($_GET["S_titleID"])
 				{
-					$result = mysql_query("SELECT * FROM Publishers WHERE titleID LIKE {$_GET["S_titleID"]}");
+					$result = mysql_query("SELECT * FROM Publishers WHERE titleID LIKE '{$_GET["S_titleID"]}'");
 				};
 			?>
 			<br>
@@ -204,10 +236,10 @@
 			<?php
 				echo $_GET["S_pName"];
 				
-				//does not work !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				
 				if($_GET["S_pName"])
 				{
-					$result = mysql_query("SELECT * FROM Publishers WHERE pName LIKE {$_GET["S_pName"]}");
+					$result = mysql_query("SELECT * FROM Publishers WHERE pName LIKE '{$_GET["S_pName"]}'");
 				};
 			?>
 			
