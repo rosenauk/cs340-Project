@@ -15,11 +15,11 @@
 
 <body>
 
-	<h1>
+	<h1 style="text-align:center;">
 		Video Game Organizer
 	</h1>
 	
-	<p>
+	<p style="text-align:center;">
 		<?php
 			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
 			. urlencode($person) . "/cs340/index.php") . "'>Home</a>";
@@ -53,9 +53,15 @@
 	
 	<br>
 	
-	<h1>
+	<h1 style="text-align:center;">
 		Welcome to the page! <br> Click a link to get started.
 	</h1>
+	
+	<div>
+	
+	<img src="home.jpg" alt="Video game shelves" style="display:block; margin:auto;" height="500px" width="750px">
+	
+	</div>
 	
 
 

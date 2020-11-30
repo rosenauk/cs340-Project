@@ -23,6 +23,17 @@
 	padding: 20px;
 }
 
+.row {
+  display: flex;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
 </style>
 
 
@@ -39,11 +50,16 @@
 
 <body>
 
-	<h1>
+<?php
+		//execute the SQL query and return records
+		$result = mysql_query("SELECT * FROM Platforms");
+		?>
+
+	<h1 style="text-align:center;">
 		Platforms
 	</h1>
 	
-	<p>
+	<p style="text-align:center;">
 		<?php
 			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
 			. urlencode($person) . "/cs340/index.php") . "'>Home</a>";
@@ -77,21 +93,21 @@
 	
 	<br>
 	
-	<p>
-		View, add to, and delete from the table here.
-	</p>
-	
+
 	<br>
-	
+<div class="row">
+	<div class="column" style="margin-left:15%;">	
 	<div class="section">
 		<p>
-			[Put stuff to add an entry here]
+			<h1 style="text-align:center;">Add An Entry</h1>
 			
 			<div class="container">
 				<form>
-				  <label>platformID (use an integer)</label>
+				<!--
+				  <label>platformID</label>
 				  <input type="number" name="A_platformID"><br />
-				  <label>platform (title of the game)</label>
+				  -->
+				  <label>platform</label>
 				  <input type="text" name="A_platform"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
@@ -103,6 +119,21 @@
 			You want to add:
 			<?php
 				echo $_GET["A_platform"];
+				
+				if($_GET["A_platform"])	
+				{
+					$select="INSERT INTO Platforms(platform) VALUES ('{$_GET["A_platform"]}')";
+					$sql=mysql_query($select);
+					
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
 
 			?>
 			
@@ -114,10 +145,11 @@
 	
 	<div class="section">
 		<p>
+			<h1 style="text-align:center;">Delete An Entry</h1>
 
 			<div class="container">
-				<form method="post">
-				  <label>platformID (use an integer)</label>
+				<form>
+				  <label>platformID</label>
 				  <input type="number" name="D_platformID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
@@ -129,11 +161,27 @@
 			platformID of game you want to delete:
 			<?php
 				echo $_GET["D_platformID"];
+				/*
 				if(isset($_POST["D_platformID"]) and is_numeric($_POST["D_platformID"]))
 				{
 					$platform_id = $_POST['D_platformID'];
 					$sql = mysql_query("DELETE FROM `Platforms` WHERE `platformID` = $platform_id");
 				}
+				*/
+				
+				if($_GET["D_platformID"])
+				{
+					$sql = mysql_query("DELETE FROM `Platforms` WHERE `platformID` = '{$_GET["D_platformID"]}'");
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
+
 			?>
 			
 		</p>
@@ -143,21 +191,29 @@
 	
 	<div class="section">
 		<p>
-			[Put search here]
+			<h1 style="text-align:center;">Search The Table</h1>
 			
 			<div class="container">
 				<form>
-				  <label>platformID (use an integer)</label>
+				<br>
+				  <label>platformID</label>
 				  <input type="number" name="S_platformID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
 				</form>
 				
 				<form>
-				  <label>platform </label>
+				<br>
+				  <label>platform</label>
 				  <input type="text" name="S_platform"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
+				</form>
+				
+				<form>
+				  <br>
+				  <br>
+				  <input style="width = 100px" type="submit" value="Clear">
 				</form>
 				
 			</div>
@@ -180,17 +236,22 @@
 				
 				if($_GET["S_platform"])
 				{
-					$result = mysql_query("SELECT * FROM Platforms WHERE platform LIKE {$_GET["S_platform"]}");
+					$result = mysql_query("SELECT * FROM Platforms WHERE platform LIKE '{$_GET["S_platform"]}'");
 				};
 			?>
-			<br>
+			
 		</p>
+	</div>
+	<br>
+	<br>
+	
 	</div>
 	
 	<br>
-	
+
+	<div class="column">
 	<p>
-		[Put Table here] &nbsp (platformID, platform)
+		<h1>Table</h1>
 		
 		
 		
@@ -216,9 +277,9 @@
             ?>
 		</table>
 	</p>
+	</div>
 
-
-
+</div>
 </body>
 
 </html>

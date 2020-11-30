@@ -22,6 +22,17 @@
 	padding: 20px;
 }
 
+.row {
+  display: flex;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
 </style>
 
 <html lang="en">
@@ -42,11 +53,11 @@
 		$result = mysql_query("SELECT * FROM Ratings");
 		?>
 
-	<h1>
+	<h1 style="text-align:center;">
 		Ratings
 	</h1>
 	
-	<p>
+	<p style="text-align:center;">
 		<?php
 			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
 			. urlencode($person) . "/cs340/index.php") . "'>Home</a>";
@@ -80,22 +91,20 @@
 	
 	<br>
 	
-	<p>
-		View, add to, and delete from the table here.
-	</p>
-	
+
 	<br>
-	
+<div class="row">
+	<div class="column" style="margin-left:15%;">	
 	<div class="section">
 		<p>
-			[Put stuff to add an entry here]
+			<h1 style="text-align:center;">Add An Entry</h1>
 			
 			<div class="container">
 				<form>
-				  <label>ratingID (use an integer)</label>
+				<!--
+				  <label>ratingID</label>
 				  <input type="number" name="A_ratingID"><br />
-				  <label>titleID (use an integer)</label>
-				  <input type="number" name="A_titleID"><br />
+				  -->
 				  <label>rating</label>
 				  <input type="text" name="A_rating"><br />
 				  <br>
@@ -108,6 +117,22 @@
 			You want to add:
 			<?php
 				echo $_GET["A_rating"];
+				
+				
+				if($_GET["A_rating"])	
+				{
+					$select="INSERT INTO Ratings(rating) VALUES ('{$_GET["A_rating"]}')";
+					$sql=mysql_query($select);
+					
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
 
 			?>
 		</p>
@@ -117,10 +142,10 @@
 	
 	<div class="section">
 		<p>
-			[Put stuff to delete an entry here]
+			<h1 style="text-align:center;">Delete An Entry</h1>
 			<div class="container">
-				<form method="post">
-				  <label>ratingID (use an integer)</label>
+				<form>
+				  <label>ratingID</label>
 				  <input type="number" name="D_ratingID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
@@ -132,11 +157,26 @@
 			ratingID of rating you want to delete:
 			<?php
 				echo $_GET["D_ratingID"];
+				/*
 				if(isset($_POST["D_ratingID"]) and is_numeric($_POST["D_ratingID"]))
 				{
 					$rating_id = $_POST['D_ratingID'];
 					$sql = mysql_query("DELETE FROM `Ratings` WHERE `ratingID` = $rating_id");
+				}*/
+				
+				if($_GET["D_ratingID"])
+				{
+					$sql = mysql_query("DELETE FROM `Ratings` WHERE `ratingID` = '{$_GET["D_ratingID"]}'");
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
 				}
+
 			?>
 		</p>
 	</div>
@@ -145,27 +185,28 @@
 	
 	<div class="section">
 		<p>
-			[Put search here]
+			<h1 style="text-align:center;">Search The Table</h1>
 			<div class="container">
 				<form>
-				  <label>ratingID (use an integer)</label>
+				<br>
+				  <label>ratingID</label>
 				  <input type="number" name="S_ratingID"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
 				</form>
 				
 				<form>
-				  <label>titleID </label>
-				  <input type="number" name="S_titleID"><br />
+				<br>
+				  <label>rating</label>
+				  <input type="text" name="S_rating"><br />
 				  <br>
 				  <input style="width = 100px" type="submit">
 				</form>
 				
 				<form>
-				  <label>rating</label>
-				  <input type="text" name="S_rating"><br />
 				  <br>
-				  <input style="width = 100px" type="submit">
+				  <br>
+				  <input style="width = 100px" type="submit" value="Clear">
 				</form>
 			</div>
 			
@@ -181,43 +222,36 @@
 				};
 			?>
 			<br>
-			Search by titleID:
-			<?php
-				echo $_GET["S_titleID"];
-				
-				if($_GET["S_titleID"])
-				{
-					$result = mysql_query("SELECT * FROM Ratings WHERE titleID LIKE {$_GET["S_titleID"]}");
-				};
-			?>
-			<br>
 			Search by rating:
 			<?php
 				echo $_GET["S_rating"];
 				
 				if($_GET["S_rating"])
 				{
-					$result = mysql_query("SELECT * FROM Ratings WHERE rating LIKE {$_GET["S_rating"]}");
+					$result = mysql_query("SELECT * FROM Ratings WHERE rating LIKE '{$_GET["S_rating"]}'");
 				};
 			?>
 			<br>
 		</p>
 	</div>
+	<br>
+	<br>
+	</div>
 	
 	<br>
 	
+
+	<div class="column">
 	<p>
-		[Put Table here] &nbsp (titleID FK from Videogames, rating, ratingID)
+		<h1>Table</h1>
 
 		
 		
 		<table style="border:1px solid black; border-collapse: collapse; text-align: left;background-color: #F5F5F5;">
 			<col width= "100px" />
 			<col width= "100px" />
-			<col width= "100px" />
 		  <tr>
 			<th>ratingID</th>
-			<th>titleID</th>
 			<th>rating</th>
 			<th> </th>
 		  </tr>
@@ -226,7 +260,6 @@
                 echo
                 "<tr>
 					<td>{$row['ratingID']}</td>
-					<td>{$row['titleID']}</td>
 					<td>{$row['rating']}</td>
 					<td><button>Edit</button></td>
 				</tr>";
@@ -234,9 +267,9 @@
             ?>
 		</table>
 	</p>
-
-
-
+	</div>
+	
+</div>
 </body>
 
 </html>
