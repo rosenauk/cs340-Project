@@ -88,8 +88,8 @@ CREATE TABLE `PlatToVids` (
   `platformID` int(11) DEFAULT '0',
   PRIMARY KEY (`titleID`,`platformID`),
   KEY `platformID` (`platformID`),
-  CONSTRAINT `PlatToVids_ibfk_1` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `PlatToVids_ibfk_2` FOREIGN KEY (`platformID`) REFERENCES `Platforms` (`platformID`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `PlatToVids_ibfk_1` FOREIGN KEY (`titleID`) REFERENCES `Videogames` (`titleID`),
+  CONSTRAINT `PlatToVids_ibfk_2` FOREIGN KEY (`platformID`) REFERENCES `Platforms` (`platformID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

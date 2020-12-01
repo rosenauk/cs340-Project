@@ -58,7 +58,8 @@
 
 		<?php
 		//execute the SQL query and return records
-		$result = mysql_query("SELECT * FROM Videogames");
+		$result = mysql_query("SELECT * FROM Videogames ORDER BY titleID ASC");
+		//$result_publisher = mysql_query("SELECT * FROM Publishers");
 		?>
 
 	<h1 style="text-align:center;">
@@ -101,7 +102,7 @@
 				  <label>releaseDate</label>
 				  <input type="date" name="A_releaseDate"><br />
 				  <br>
-				  <label>publisherID (optional)</label>
+				  <label>publisher (optional)</label>
 				  <input type="number" name="A_publisherID"><br />
 				  <br>
 				  <label>ratingID (optional)</label>
@@ -117,12 +118,11 @@
 			<?php
 				echo $_GET["A_title"];
 
-				if($_GET["A_title"] && $_GET["A_publisherID"] && $_GET["A_ratingID"])	
+				if($_GET["A_title"] && $_GET["A_publisher"] && $_GET["A_ratingID"])	
 				{
 					
 					$select="INSERT INTO Videogames(title,releaseDate,publisherID,ratingID) VALUES ('{$_GET["A_title"]}','{$_GET["A_releaseDate"]}','{$_GET["A_publisherID"]}','{$_GET["A_ratingID"]}')";
 					$sql=mysql_query($select);
-					
 					
 					echo '
 					<form>
