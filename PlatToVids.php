@@ -49,7 +49,7 @@
 
 		<?php
 		//execute the SQL query and return records
-		$result = mysql_query("SELECT * FROM PlatToVids");
+		$result = mysql_query("SELECT * FROM PlatToVids ORDER BY titleID ASC");
 		?>
 
 	<h1 style="text-align:center;">
@@ -94,6 +94,90 @@
 	<br>
 <div class="row">
 	<div class="column" style="margin-left:15%;">	
+	
+	
+	<div class="section">
+		<p>
+			<h1 style="text-align:center;">Add An Entry</h1>
+			
+			<div class="container">
+				<form>
+				  <label>titleID</label>
+				  <input type="number" name="A_titleID"><br />
+				  <label>platformID</label>
+				  <input type="number" name="A_platformID"><br />
+				  <br>
+				  <input style="width = 100px" type="submit">
+				</form>
+			</div>
+			
+			<br>
+			
+			You want to add the relation between titleID "<?php echo $_GET["A_titleID"];?>" and platformID "<?php echo $_GET["A_platformID"];?>"
+			<?php			
+				
+				if($_GET["A_titleID"] && $_GET["A_platformID"] )	
+				{
+					$select="INSERT INTO PlatToVids(titleID,platformID) VALUES ('{$_GET["A_titleID"]}', '{$_GET["A_platformID"]}')";
+					$sql=mysql_query($select);
+					
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
+
+			?>
+		</p>
+	</div>
+	
+	<br>
+	
+	
+	
+	<div class="section">
+		<p>
+			<h1 style="text-align:center;">Delete An Entry</h1>
+			<div class="container">
+				<form>
+				  <label>titleID</label>
+				  <input type="number" name="D_titleID"><br />
+				  <label>platformID</label>
+				  <input type="number" name="D_platformID"><br />
+				  <br>
+				  <input style="width = 100px" type="submit">
+				</form>
+			</div>
+			
+			<br>
+			
+			you want to delete the relation between titleID "<?php echo $_GET["D_titleID"];?>" and platformID "<?php echo $_GET["D_platformID"];?>"
+			<?php
+				
+				if($_GET["D_titleID"] && $_GET["D_platformID"])
+				{
+					$sql = mysql_query("DELETE FROM `PlatToVids` WHERE `titleID` = '{$_GET["D_titleID"]}' AND `platformID` = '{$_GET["D_platformID"]}'");
+					
+					echo '
+					<form>
+						<br>
+						<br>
+						<input style="width = 100px" type="submit" value="Confirm">
+					</form>
+					';
+				}
+
+			?>
+		</p>
+	</div>
+	
+	<br>
+	
+	
 	<div class="section">
 		<p>
 			<h1 style="text-align:center;">Search The Table</h1>
