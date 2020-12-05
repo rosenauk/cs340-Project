@@ -474,22 +474,50 @@
 		  </tr>
 		  
 		  <?php
+			$pub_result = mysql_query("SELECT * FROM Publishers");
             while ($row = mysql_fetch_assoc($result)) {
-                echo
-                "<tr>
-					<td>{$row['titleID']}</td>
-					<td>{$row['title']}</td>
-					<td>{$row['releaseDate']}</td>
-					<td>{$row['publisherID']}</td>
-					<td>{$row['ratingID']}</td>";
+                echo "<form action='videogames.php' method='POST'><tr><td>";
+				echo "{$row['titleID']}</td><td>";
+				echo "<input type='text' name='title' value='" .$row['title']. "'></td><td>";
+				echo "<input type='date' name='releaseDate' value='" .$row['releaseDate']. "'></td><td>";
+				$cur_pub_row = mysql_fetch_assoc($pub_result);	
+				$curr_pub_result = mysql_query("SELECT * FROM Publishers 
+												WHERE publisherID LIKE {$row['publisherID']}");
+				// &#92; is \ character
+				echo "<select name='&#92;" . $row['publisherID'] . "&#92;'>";
+				while($row_pub = mysql_fetch_assoc($pub_result)) {
+					echo "<option value='" . $row_pub['pName'] . "'>" . $row['pName'] . "</option>";
+				}
+
 				echo '<td><form method="post"></td>';
-				echo '<td><input type="button" class="open-button" onclick="openForm()" name="rowButton'. $row['titleID'] .'" value="Edit"/> </td>';
+				echo '<td><button class="update-button" name="UpdateButton'
+				. $row['titleID'] .'" value="' . $row[titleID] . '"/>Update</td></button>';
 				echo '<td></form></td>';
+				
 				echo "</tr>";
-            }
+			}
+			/*
 			if(isset($_POST['rowButton' . $row['titleID']])){
 				echo "<td><p>The button selected is " . $row['titleID'] . "</p></td>";
 				//$sql = "UPDATE Videogames SET title='{}'"
+			}
+			*/
+			if(isset($_POST['UpdateButton'])){
+				$u_titleID     = $_POST['UpdateButton'];
+				$u_title       = $_POST['title'];
+				$u_releaseDate = $_POST['releaseDate'];
+				$u_publisherID = $_POST['publisherID'];
+				$u_ratingID    = $_POST['ratingID'];
+				//echo "<td><p>The button selected is " . $row['titleID'] . "</p></td>";
+				$sql = sqlmyquery("UPDATE Videogames 
+						SET title='{$u_title}',
+							releaseDate='{$u_releaseDate}',
+							publisherID='{$u_publisherID}',
+							ratingID'{$u_ratingID}',
+						WHERE titleID='$u_titleID'");
+
+				
+
 			}
             ?>
 
