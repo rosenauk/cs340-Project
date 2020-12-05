@@ -33,6 +33,36 @@
   height: 300px; /* Should be removed. Only for demonstration */
 }
 
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
 
 </style>
 
@@ -49,6 +79,7 @@
 </head>
 
 <body>
+
 
 		<?php
 		//execute the SQL query and return records
@@ -450,16 +481,50 @@
 					<td>{$row['title']}</td>
 					<td>{$row['releaseDate']}</td>
 					<td>{$row['publisherID']}</td>
-					<td>{$row['ratingID']}</td>
-					<td><button>Edit</button></td>
-				</tr>";
+					<td>{$row['ratingID']}</td>";
+				echo '<td><form method="post"></td>';
+				echo '<td><input type="button" class="open-button" onclick="openForm()" name="rowButton'. $row['titleID'] .'" value="Edit"/> </td>';
+				echo '<td></form></td>';
+				echo "</tr>";
             }
+			if(isset($_POST['rowButton' . $row['titleID']])){
+				echo "<td><p>The button selected is " . $row['titleID'] . "</p></td>";
+				//$sql = "UPDATE Videogames SET title='{}'"
+			}
             ?>
 
 		</table>
+		
+		<div class="form-popup" id="myForm">
+			<form action="/action_page.php" class="form-container">
+				<h1>Update</h1>
+
+				<label for="title"><b>Title</b></label>
+				<input type="text" placeholder="Enter Title" name="Title" required>
+
+				<label for="releaseDate"><b>Release Date</b></label>
+				<input type="text" placeholder="Update releaseDate" name="Release Date" required>
+
+				<button type="submit" class="btn">Submit</button>
+				<button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+			</form>
+		</div>
+
 	</p>
 	</div>
 </div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "none";
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
 </body>
 
 </html>
