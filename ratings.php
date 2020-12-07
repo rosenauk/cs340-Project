@@ -47,8 +47,29 @@
 
 <body>
 
+<?php
+		include 'dbhost.php';
+
+		if(isset($_POST['UpdateButton'])){
+			$u_ratingID	    = $_POST['UpdateButton'];
+			$u_rating       = $_POST['U_rating'];
+	
+			$u_sql = mysql_query("UPDATE Ratings SET rating='".$u_rating."' WHERE ratingID=$u_ratingID");
+			//echo $usql;
+	
+			if($u_sql){
+				$u_sql = null;
+			}
+			else{
+				echo "error updating record: " . $connector->error;
+			}
+			mysql_close($connector);
+		}
+	?>
+
 		
 		<?php
+		include 'dbhost.php';
 		//execute the SQL query and return records
 		$result = mysql_query("SELECT * FROM Ratings");
 		?>
@@ -265,14 +286,17 @@
 			<th> </th>
 		  </tr>
 		  <?php
+		  	include 'dbhost.php';
             while ($row = mysql_fetch_assoc($result)) {
                 echo
-                "<tr>
+                "<form action='ratings.php' method='POST'><tr>
 					<td>{$row['ratingID']}</td>
-					<td>{$row['rating']}</td>
-					<td><button>Edit</button></td>
-				</tr>";
-            }
+					<td><input type='text' name='U_rating' value='" . $row['rating'] . "'</td>";
+				echo '<td><button class="update-button" name="UpdateButton'
+				.'" value="' . $row['ratingID'] . '"/>Update</td></button>';
+				echo '<td></form></td>';
+				echo "</tr>";
+			}
             ?>
 		</table>
 	</p>
