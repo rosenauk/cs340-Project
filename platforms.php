@@ -51,6 +51,27 @@
 <body>
 
 <?php
+		include 'dbhost.php';
+
+		if(isset($_POST['UpdateButton'])){
+			$u_platformID     = $_POST['UpdateButton'];
+			$u_platform       = $_POST['U_platform'];
+	
+			$u_sql = mysql_query("UPDATE Platforms SET platform='".$u_platform."' WHERE platformID=$u_platformID");
+			echo $usql;
+	
+			if($u_sql){
+				$u_sql = null;
+			}
+			else{
+				echo "error updating record: " . $connector->error;
+			}
+			mysql_close($connector);
+		}
+	?>
+
+<?php
+		include 'dbhost.php';
 		//execute the SQL query and return records
 		$result = mysql_query("SELECT * FROM Platforms");
 		?>
@@ -266,14 +287,17 @@
 			<th> </th>
 		  </tr>
 		  <?php
+		  	include 'dbhost.php';
             while ($row = mysql_fetch_assoc($result)) {
                 echo
-                "<tr>
+                "<form action='platforms.php' method='POST'><tr>
 					<td>{$row['platformID']}</td>
-					<td>{$row['platform']}</td>
-					<td><button>Edit</button></td>
-				</tr>";
-            }
+					<td><input type='text' name='U_platform' value='" . $row['platform'] . "'</td>";
+				echo '<td><button class="update-button" name="UpdateButton'
+				.'" value="' . $row['platformID'] . '"/>Update</td></button>';
+				echo '<td></form></td>';
+				echo "</tr>";
+			}
             ?>
 		</table>
 	</p>
@@ -283,5 +307,8 @@
 </body>
 
 </html>
+<?php
+
+?>
 
 <?php mysql_close($connector); ?>

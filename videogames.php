@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", "On");
+//error_reporting(E_ALL);
+//ini_set("display_errors", "On");
 
  include_once 'dbhost.php';
 
@@ -104,13 +104,14 @@ ini_set("display_errors", "On");
 			// debugging prints
 			//$u_sql = mysql_query($u_sql);
 			//echo "<b> " . $u_sql . "</b>";					
+			
 			if($u_sql) {
-				echo "<b> " . $u_sql . "</b>";
+				//echo "<b> " . $u_sql . "</b>";
 				$u_sql = null;
 			}
 			else {
 				echo "Error updating record: " . $connector->error;
-				die( "Error updating record: " . $connector->error);
+				//die( "Error updating record: " . $connector->error);
 			}
 			mysql_close($connector);
 		}
