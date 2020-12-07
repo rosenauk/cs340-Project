@@ -1,9 +1,11 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", "On");
-
- include_once 'dbhost.php';
-
+ $username = "cs340_rosenauk";
+ $password = "8003";
+ $host = "classmysql.engr.oregonstate.edu";
+ $connector = mysql_connect($host, $username, $password)
+    or die("Unable to connect");
+ $selected = mysql_select_db("cs340_rosenauk", $connector)
+    or die("Unable to connect");
  ?>
 
 <!doctype html>
@@ -85,7 +87,7 @@ ini_set("display_errors", "On");
 <body>
 
 	<?php
-		include 'dbhost.php';
+		//include 'dbhost.php';
 
 		if(isset($_POST['UpdateButton'])){
 			$u_titleID     = $_POST['UpdateButton'];
@@ -105,12 +107,12 @@ ini_set("display_errors", "On");
 			//$u_sql = mysql_query($u_sql);
 			//echo "<b> " . $u_sql . "</b>";					
 			if($u_sql) {
-				echo "<b> " . $u_sql . "</b>";
+				//echo "<b> " . $u_sql . "</b>";
 				$u_sql = null;
 			}
 			else {
-				echo "Error updating record: " . $connector->error;
-				die( "Error updating record: " . $connector->error);
+				//echo "Error updating record: " . $connector->error;
+				//die( "Error updating record: " . $connector->error);
 			}
 			mysql_close($connector);
 		}
@@ -127,35 +129,17 @@ ini_set("display_errors", "On");
 	</h1>
 	
 	<p style="text-align:center;">
-		<?php
-			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
-			. urlencode($person) . "/cs340/index.php") . "'>Home</a>";
-		?>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/">Home</a>
 		&nbsp
-		<?php
-			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
-			. urlencode($person) . "/cs340/videogames.php") . "'>Videogames</a>";
-		?>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/videogames.php">Videogames</a>
 		&nbsp
-		<?php
-			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
-			. urlencode($person) . "/cs340/publishers.php") . "'>Publishers</a>";
-		?>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/publishers.php">Publishers</a>
 		&nbsp
-		<?php
-			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
-			. urlencode($person) . "/cs340/platforms.php") . "'>Platforms</a>";
-		?>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/platforms.php">Platforms</a>
 		&nbsp
-		<?php
-			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
-			. urlencode($person) . "/cs340/ratings.php") . "'>Ratings</a>";
-		?>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/ratings.php">Ratings</a>
 		&nbsp
-		<?php
-			echo "<a href='" . htmlspecialchars("https://web.engr.oregonstate.edu/~" 
-			. urlencode($person) . "/cs340/PlatToVids.php") . "'>PlatToVids</a>";
-		?>
+		<a href="https://web.engr.oregonstate.edu/~rosenauk/cs340/PlatToVids.php">PlatToVids</a>
 	</p>
 	
 	<br>
@@ -385,15 +369,12 @@ ini_set("display_errors", "On");
 				<br>
 				  <label>title </label>
 				  <input type="text" name="S_title"><br />
-
 				<br>
 				  <label>releaseDate</label>
 				  <input type="date" name="S_releaseDate"><br />
-
 				<br>
 				  <label>publisherID</label>
 				  <input type="number" name="S_publisherID"><br />
-
 				<br>
 				  <label>ratingID</label>
 				  <input type="number" name="S_ratingID"><br />
@@ -401,7 +382,6 @@ ini_set("display_errors", "On");
 				  
 				  <input style="width = 100px" type="submit">
 				</form>
-
 				
 				<form>
 				  <br>
@@ -505,8 +485,9 @@ ini_set("display_errors", "On");
 			<th>titleID</th>
 			<th>title</th>
 			<th>releaseDate</th>
-			<th>publisherID</th>
-			<th>ratingID</th>
+			<th>publisher</th>
+			<th>rating</th>
+			<th> </th>
 			<th> </th>
 		  </tr>
 		  
