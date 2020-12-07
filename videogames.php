@@ -1,5 +1,9 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", "On");
+
  include_once 'dbhost.php';
+
  ?>
 
 <!doctype html>
@@ -80,11 +84,43 @@
 
 <body>
 
+	<?php
+		include 'dbhost.php';
 
-		<?php
-		//execute the SQL query and return records
-		$result = mysql_query("SELECT * FROM Videogames");
-		?>
+		if(isset($_POST['UpdateButton'])){
+			$u_titleID     = $_POST['UpdateButton'];
+			$u_title       = $_POST['U_title'];
+			$u_releaseDate = $_POST['U_releaseDate'];
+			$u_publisherID = $_POST['U_publisherID'];
+			$u_ratingID    = $_POST['U_ratingID'];
+			
+			// debugging print
+			//echo $u_title;
+			//echo "<td><p>The button selected is " . $row['titleID'] . "</p></td>";
+			//echo "UPDATE Videogames SET title='".$u_title."', releaseDate='".$u_releaseDate."', publisherID=$u_publisherID, ratingID=$u_ratingID WHERE titleID=$u_titleID";
+			
+			$u_sql = mysql_query("UPDATE Videogames SET title='".$u_title."', releaseDate='".$u_releaseDate."', publisherID=$u_publisherID, ratingID=$u_ratingID WHERE titleID=$u_titleID");
+			
+			// debugging prints
+			//$u_sql = mysql_query($u_sql);
+			//echo "<b> " . $u_sql . "</b>";					
+			if($u_sql) {
+				echo "<b> " . $u_sql . "</b>";
+				$u_sql = null;
+			}
+			else {
+				echo "Error updating record: " . $connector->error;
+				die( "Error updating record: " . $connector->error);
+			}
+			mysql_close($connector);
+		}
+	?>
+
+	<?php
+	include 'dbhost.php';
+	//execute the SQL query and return records
+	$result = mysql_query("SELECT * FROM Videogames");
+	?>
 
 	<h1 style="text-align:center;">
 		Videogames
@@ -158,6 +194,7 @@
 			
 			You want to add:
 			<?php
+				include 'dbhost.php';
 				echo $_GET["A_title"];
 
 				if($_GET["A_title"] && $_GET["A_publisherID"] && $_GET["A_ratingID"])	
@@ -474,25 +511,65 @@
 		  </tr>
 		  
 		  <?php
+		  	// grab publishers
 			$pub_result = mysql_query("SELECT * FROM Publishers");
-            while ($row = mysql_fetch_assoc($result)) {
-                echo "<form action='videogames.php' method='POST'><tr><td>";
-				echo "{$row['titleID']}</td><td>";
-				echo "<input type='text' name='title' value='" .$row['title']. "'></td><td>";
-				echo "<input type='date' name='releaseDate' value='" .$row['releaseDate']. "'></td><td>";
-				$cur_pub_row = mysql_fetch_assoc($pub_result);	
-				$curr_pub_result = mysql_query("SELECT * FROM Publishers 
-												WHERE publisherID LIKE {$row['publisherID']}");
-				// &#92; is \ character
-				echo "<select name='&#92;" . $row['publisherID'] . "&#92;'>";
-				while($row_pub = mysql_fetch_assoc($pub_result)) {
-					echo "<option value='" . $row_pub['pName'] . "'>" . $row['pName'] . "</option>";
-				}
+			$options = "";
+			while($row_pub = mysql_fetch_array($pub_result)) {
+				//echo "<option value='" . $row_pub['pName'] . "'>" . $row['pName'] . "</option>";
+				$options = $options.'<option value=' . $row_pub['publisherID'] . '>' 
+				. $row_pub['pName'] . '</option>"';
+			}
 
-				echo '<td><form method="post"></td>';
+			// grab ratings
+			$rat_result = mysql_query("SELECT * FROM Ratings");
+			$rat_options = "";
+			while($row_rat = mysql_fetch_array($rat_result)) {
+				$rat_options = $rat_options.'<option value=' . $row_rat['ratingID'] . '>' 
+				. $row_rat['rating'] . '</option>"';
+			}
+
+			// table creation
+            while ($row = mysql_fetch_assoc($result)) {
+				//echo "<form action='videogames.php' method='POST'><tr><td>";
+				echo "<form action='videogames.php' method='POST'><tr><td>";
+				echo "{$row['titleID']}</td><td>";
+				echo "<input type='text' name='U_title' value='" .$row['title']. "'></td><td>";
+				echo "<input type='date' name='U_releaseDate' value='" .$row['releaseDate']. "'></td><td>";
+
+				// publisher
+				$cur_pub_result = mysql_query("SELECT * 
+												FROM Publishers
+												WHERE publisherID
+												LIKE {$row['publisherID']}");
+				$cur_pub = mysql_fetch_assoc($cur_pub_result);
+
+				//echo "<select name='&#92;" . $row['publisherID'] . "&#92;'>";
+				echo "<select name='U_publisherID'>";
+				echo "<option value='" . $cur_pub['publisherID'] . "'>" . $cur_pub['pName'] . "</option>";
+				echo $options;
+				echo "</select></td><td>";
+
+				// ratings
+				$cur_rat_result = mysql_query("SELECT * 
+												FROM Ratings
+												WHERE ratingID
+												LIKE {$row['ratingID']}");
+				$rat_pub = mysql_fetch_assoc($cur_rat_result);
+
+				//echo "<select name='&#92;" . $row['ratingID'] . "&#92;'>";
+				echo "<select name='U_ratingID'>";
+				echo "<option value='" . $rat_pub['ratingID'] . "'>" . $rat_pub['rating'] . "</option>";
+				echo $rat_options;
+				echo "</select></td><td>";
+
+				//echo '<td><form method="post"></td>';
+				//echo '<td><button class="update-button" name="UpdateButton'
+				//. $row['titleID'] .'" value="' . $row['titleID'] . '"/>Update</td></button>';
+				// update button
 				echo '<td><button class="update-button" name="UpdateButton'
-				. $row['titleID'] .'" value="' . $row[titleID] . '"/>Update</td></button>';
+				.'" value="' . $row['titleID'] . '"/>Update</td></button>';
 				echo '<td></form></td>';
+
 				
 				echo "</tr>";
 			}
@@ -502,23 +579,6 @@
 				//$sql = "UPDATE Videogames SET title='{}'"
 			}
 			*/
-			if(isset($_POST['UpdateButton'])){
-				$u_titleID     = $_POST['UpdateButton'];
-				$u_title       = $_POST['title'];
-				$u_releaseDate = $_POST['releaseDate'];
-				$u_publisherID = $_POST['publisherID'];
-				$u_ratingID    = $_POST['ratingID'];
-				//echo "<td><p>The button selected is " . $row['titleID'] . "</p></td>";
-				$sql = sqlmyquery("UPDATE Videogames 
-						SET title='{$u_title}',
-							releaseDate='{$u_releaseDate}',
-							publisherID='{$u_publisherID}',
-							ratingID'{$u_ratingID}',
-						WHERE titleID='$u_titleID'");
-
-				
-
-			}
             ?>
 
 		</table>
